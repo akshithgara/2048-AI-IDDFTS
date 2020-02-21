@@ -1,5 +1,5 @@
 import queue
-from node import Node
+from grid import grid
 
 
 # Function to check if the goal state has been achieved.
@@ -15,9 +15,11 @@ def isGoal(state, goal):
 def ID_DFTS(state, goal, spawnList, gridSize):
     frontier = queue.LifoQueue()
 
-    root = Node(state, '', 0)
+    root = grid(state, '', 0, spawnList, gridSize)
     L = 0  # Max depth
+
     while True:
+        # print(L)
         frontier.put(root)
         while True:
             if frontier.empty():
