@@ -45,16 +45,16 @@ def move_is_possible(direction, field1):
 
 
 # Function to spawn values as per the given guidelines
-def spawn(field, spawnNums, spawnCount):
+def spawn(field, spawnNums, spawnCount, size):
     new_element = spawnNums[spawnCount]
     if field[0][0] == 0:
         field[0][0] = new_element
-    elif field[0][len(field) - 1] == 0:
-        field[0][len(field) - 1] = new_element
-    elif field[len(field) - 1][len(field) - 1] == 0:
-        field[len(field) - 1][len(field) - 1] = new_element
-    elif field[len(field) - 1][0] == 0:
-        field[len(field) - 1][0] = new_element
+    elif field[0][size[0]-1] == 0:
+        field[0][size[0]-1] = new_element
+    elif field[size[1]-1][size[0]-1] == 0:
+        field[size[1]-1][size[0]-1] = new_element
+    elif field[size[1]-1][0] == 0:
+        field[size[1]-1][0] = new_element
     else:
         return
 
@@ -62,9 +62,10 @@ def spawn(field, spawnNums, spawnCount):
 # Grid class to perform moves and add up values if they match
 class grid:
 
-    def __init__(self, current_grid, spawn_list):
+    def __init__(self, current_grid, spawn_list, size):
         self.current_grid = current_grid
         self.spawnList = spawn_list
+        self.size = size
 
     def move(self, direction, spawnVal):
         def move_row_left(row):
@@ -107,8 +108,8 @@ class grid:
             if move_is_possible(direction, self.current_grid):
                 self.current_grid = moves[direction](self.current_grid)
                 if spawnVal > len(self.spawnList) - 1:
-                    spawnVal = spawnVal % 3
-                spawn(self.current_grid, self.spawnList, spawnVal)
+                    spawnVal = spawnVal % len(self.spawnList)
+                spawn(self.current_grid, self.spawnList, spawnVal, self.size)
                 return True
             else:
                 return False

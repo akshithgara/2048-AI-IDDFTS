@@ -15,15 +15,14 @@ if __name__ == '__main__':
     else:
         inputFile = input("Please enter the filename: ")
 
-    firstState, goal, spawnList = inputGrabber(inputFile)
+    firstState, goal, spawnList, gridSize = inputGrabber(inputFile)
     # Timer to measure the execution time.
     startTime = datetime.now()
-    sol = ID_DFTS(firstState, goal, spawnList)
+    sol = ID_DFTS(firstState, goal, spawnList, gridSize)
     endTime = datetime.now()
     execTime = endTime - startTime
     print(execTime.microseconds)
     print(len(sol[0]))
     print(sol[0])
-    # print(''.join(sol[0]))
     for line in sol[1].STATE:
         print(' '.join([str(x) for x in line]))

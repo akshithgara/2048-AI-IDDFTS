@@ -25,7 +25,6 @@ def inputGrabber(inputFile):
     gridSize = list(scrapedLines[1].split(' '))
     for num in range(len(gridSize)):
         gridSize[num] = int(gridSize[num])
-
     spawnList = list(scrapedLines[2].split(' '))
     for num in range(len(spawnList)):
         spawnList[num] = int(spawnList[num])
@@ -43,4 +42,4 @@ def inputGrabber(inputFile):
         for j in range(len(firstState[i])):
             firstState[i][j] = int(firstState[i][j])
 
-    return firstState, goalNum, spawnList
+    return firstState, goalNum, spawnList, gridSize

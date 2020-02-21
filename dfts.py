@@ -12,12 +12,11 @@ def isGoal(state, goal):
     return False
 
 
-def ID_DFTS(state, goal, spawnList):
+def ID_DFTS(state, goal, spawnList, gridSize):
     frontier = queue.LifoQueue()
 
     root = Node(state, '', 0)
     L = 0  # Max depth
-
     while True:
         frontier.put(root)
         while True:
@@ -25,10 +24,12 @@ def ID_DFTS(state, goal, spawnList):
                 break
 
             curNode = frontier.get()
+
+            # print(curNode.STATE)
             if isGoal(curNode.STATE, goal):
                 return curNode.PATH, curNode
 
-            for child in curNode.CHILDREN(spawnList, L):
+            for child in curNode.CHILDREN(spawnList, L, gridSize):
                 frontier.put(child)
 
         L += 1
