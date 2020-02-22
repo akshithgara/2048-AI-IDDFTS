@@ -22,7 +22,8 @@ if __name__ == '__main__':
     endTime = datetime.now()
     execTime = endTime - startTime
     print(execTime.microseconds)
-    print(len(sol[0]))
-    print(sol[0])
-    for line in sol[1].STATE:
-        print(' '.join([str(x) for x in line]))
+    if sol:
+        print(len(sol[0]))
+        print(sol[0])
+        for line in sol[1].STATE:
+            print(' '.join([str(x) for x in line]))

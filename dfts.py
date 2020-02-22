@@ -16,10 +16,9 @@ def ID_DFTS(state, goal, spawnList, gridSize):
     frontier = queue.LifoQueue()
 
     root = grid(state, '', 0, spawnList, gridSize)
-    L = 0  # Max depth
-
-    while True:
-        # print(L)
+    bound = 0  # Max depth
+    natural_failure = False
+    while not natural_failure:
         frontier.put(root)
         while True:
             if frontier.empty():
@@ -27,11 +26,14 @@ def ID_DFTS(state, goal, spawnList, gridSize):
 
             curNode = frontier.get()
 
-            # print(curNode.STATE)
             if isGoal(curNode.STATE, goal):
                 return curNode.PATH, curNode
-
-            for child in curNode.CHILDREN(spawnList, L, gridSize):
-                frontier.put(child)
-
-        L += 1
+            children = curNode.CHILDREN(spawnList, bound, gridSize)
+            if len(curNode.PATH) < bound:
+                if not children:
+                    natural_failure=True
+                else:
+                    for child in children:
+                        natural_failure = False
+                        frontier.put(child)
+        bound += 1
