@@ -63,7 +63,6 @@ def spawn(field, spawnNums, spawnCount, size):
 class grid:
 
     def __init__(self, state, path, spawn, spawn_list, size):
-        # self.current_grid = current_grid
         self.STATE = state
         self.PATH = path
         self.SPAWN = spawn
@@ -118,7 +117,7 @@ class grid:
                 return False
 
     def CHILDREN(self, sl, depth, gridSize):  # Function to try out all the moves and add it to the childList.
-        if len(self.PATH) >= depth:
+        if len(self.PATH) >= depth: # Doesn't explore anymore children nodes and returns out if the depth limit is hit.
             return []
 
         childList = []

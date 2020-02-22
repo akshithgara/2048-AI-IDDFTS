@@ -22,6 +22,7 @@ if __name__ == '__main__':
     endTime = datetime.now()
     execTime = endTime - startTime
     print(execTime.microseconds)
+    # Prints the solution only if there is one.
     if sol:
         print(len(sol[0]))
         print(sol[0])
